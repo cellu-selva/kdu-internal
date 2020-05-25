@@ -1,0 +1,67 @@
+{
+  "name": "stock",
+  "plural": "stock",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "purchaseDate": {
+      "type": "date",
+      "required": true
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    },
+    "pricePerUnit": {
+      "type": "number"
+    },
+    "measuringUnit": {
+      "type": "string",
+      "required": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "isSettled": {
+      "type": "boolean",
+      "default": false
+    },
+    "quantity": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "product": {
+      "type": "belongsTo",
+      "model": "product",
+      "foreignKey": "productId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "vendor": {
+      "type": "belongsTo",
+      "model": "vendor",
+      "foreignKey": "vendorId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "vendorDebts": {
+      "type": "hasOne",
+      "model": "vendorDebts",
+      "foreignKey": "stockId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

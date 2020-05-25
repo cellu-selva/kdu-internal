@@ -1,0 +1,41 @@
+{
+  "name": "vendorDebts",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "balance": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "pending"
+    },
+    "paymentAudit": {
+      "type": [
+        "object"
+      ]
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stock": {
+      "type": "belongsTo",
+      "model": "stock",
+      "foreignKey": "stockId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

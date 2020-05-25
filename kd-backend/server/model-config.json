@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mongo"
+  },
+  "AccessToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongo",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "employee": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "product": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "stock": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "stockSummary": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "expense": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "sale": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "vendor": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "vendorDebts": {
+    "dataSource": "mongo",
+    "public": true
+  }
+}

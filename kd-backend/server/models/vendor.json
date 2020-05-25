@@ -1,0 +1,43 @@
+{
+  "name": "vendor",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "area": {
+      "type": "string",
+      "required": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stocks": {
+      "type": "hasMany",
+      "model": "stock",
+      "foreignKey": "vendorId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "vendorDebts": {
+      "type": "hasMany",
+      "model": "vendorDebts",
+      "foreignKey": "vendorId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

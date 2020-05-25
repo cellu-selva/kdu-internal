@@ -1,0 +1,51 @@
+{
+  "name": "sale",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    },
+    "saleDate": {
+      "type": "date",
+      "required": true
+    },
+    "saleType": {
+      "type": "string",
+      "required": true
+    },
+    "wholeWeight": {
+      "type": "number",
+      "required": true
+    },
+    "saleWeight": {
+      "type": "number",
+      "required": true
+    },
+    "pricePerUnit": {
+      "type": "number",
+      "required": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "product": {
+      "type": "belongsTo",
+      "model": "product",
+      "foreignKey": "productId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

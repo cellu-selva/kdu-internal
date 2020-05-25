@@ -1,0 +1,57 @@
+{
+  "name": "product",
+  "plural": "products",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "wastagePercentage": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stock": {
+      "type": "hasMany",
+      "model": "stock",
+      "foreignKey": "productId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "stockSummaries": {
+      "type": "hasOne",
+      "model": "stockSummary",
+      "foreignKey": "productId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "sales": {
+      "type": "hasMany",
+      "model": "sale",
+      "foreignKey": "productId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,69 @@
+{
+  "name": "expense",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "riderName": {
+      "type": "string"
+    },
+    "noOfDelivery": {
+      "type": "number"
+    },
+    "kms": {
+      "type": "number"
+    },
+    "perDeliveryCost": {
+      "type": "number"
+    },
+    "incentive": {
+      "type": "number"
+    },
+    "petrolCharge": {
+      "type": "number"
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    },
+    "quanitity": {
+      "type": "number"
+    },
+    "pricePerUnit": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "paidBy": {
+      "type": "string",
+      "required": true
+    },
+    "paidTo": {
+      "type": "string",
+      "required": true
+    },
+    "invoiceId": {
+      "type": "string"
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "expenseDate": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
