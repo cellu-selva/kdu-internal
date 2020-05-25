@@ -1,0 +1,35 @@
+.card_shadow {
+    width: 100%;
+    margin-top: 0%;
+    padding: 2%;
+    -webkit-box-shadow: 0px 0px 11px 0px rgb(241, 237, 241);
+    -moz-box-shadow: 0px 0px 11px 0px rgb(241, 237, 241);
+    box-shadow: 0px 0px 11px 0px rgb(241, 237, 241);
+    background-color: #fff;
+    border-radius: 14px;
+}
+html, body {
+    height: 100%;
+}
+.card_shadow.login {
+    margin-top: 9% !important;
+}
+#app {
+    min-height: 100vh;
+}
+.error label,
+span.error-msg {
+    color: #ff0000 !important;
+}
+
+.error input {
+    border: 1px solid #ff0000;
+}
+
+.error select {
+    border: 1px solid #ff0000;
+}
+
+.Toastify__toast {
+    font-size: 20px;
+}
