@@ -18,7 +18,11 @@ const validationSchema = object().shape({
 const Product = () => {
 
     const [products, setProducts] = useState([]);
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState({
+        name: '',
+        price: 0,
+        wastagePercentage: 0
+    });
 
     useEffect(() => {
         get(properties.PRODUCTS)

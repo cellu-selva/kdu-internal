@@ -18,20 +18,62 @@ const Expenses = () => {
         material: [],
         other: []
     });
+    const [count, setCount] = useState({
+        delivery: 0,
+        material: 0,
+        other: 0
+    })
     const [item, setItem] = useState({});
 
-    useEffect(() => {
-        
-            get(entityUrl).then((resp) => {
+    const loadEntity = (pageNo) => {
+        Promise.all([
+            get(entityUrl, {
+                filter: JSON.stringify({
+                    skip: (pageNo - 1) * 10,
+                    limit: 10
+                })
+            }),
+            get(entityUrl + '/count', {
+                filter: JSON.stringify({
+                    type: 'delivery'
+                })
+            }),
+            get(entityUrl + '/count', {
+                filter: JSON.stringify({
+                    type: 'material'
+                })
+            }),
+            get(entityUrl + '/count', {
+                filter: JSON.stringify({
+                    type: 'other'
+                })
+            })
+        ]).then(([resp, deliveryCount, materialCount, otherCount]) => {
             const data = {}
+            const count = {}
             resp.forEach((expense) => {
-                if(!data[expense.type]) {
+                if (!data[expense.type]) {
                     data[expense.type] = []
                 }
                 data[expense.type].push(expense)
+                debugger
+                if (expense.type === 'material') {
+                    count[expense.type] = materialCount.count
+                }
+                if (expense.type === 'other') {
+                    count[expense.type] = otherCount.count
+                }
+                if (expense.type === 'delivery') {
+                    count[expense.type] = deliveryCount.count
+                }
+                
             })
             setItems(data);
+            setCount(count)
         })
+    }
+    useEffect(() => {
+        loadEntity(1);
     }, [item])
 
     const [error, setError] = useState({});
@@ -54,7 +96,6 @@ const Expenses = () => {
     }
 
     const saveItem = () => {
-        debugger
         if (!(item.type && item.expenseDate)) {
             return toast.error("Mandatory fields missing")
         }
@@ -90,12 +131,11 @@ const Expenses = () => {
     }
 
     const calculateIncentive = (noOfDelivery) => {
-        // =((D35 * 30) + (E35 * 2.5) + ((D35 >= 12) + 75))
         const deliverySalary = noOfDelivery * salaryPerDelivery;
         let incentive = 0
-        if(noOfDelivery >= 12) {
+        if (noOfDelivery >= 12) {
             incentive = 75
-        } else if (noOfDelivery >= 12 && noOfDelivery <=20) {
+        } else if (noOfDelivery >= 12 && noOfDelivery <= 20) {
             incentive = 100
         } else if (noOfDelivery > 20) {
             incentive = 200
@@ -108,16 +148,22 @@ const Expenses = () => {
     }
 
     const deliveryData = {
-        headers: ['type', 'expenseDate', 'riderName', 'noOfDelivery', 'kms', 'perDeliveryCost', 'incentive', 'petrolCharge', 'totalPrice','paidBy', 'paidTo'],
-        values: items['delivery']
+        headers: ['type', 'expenseDate', 'riderName', 'noOfDelivery', 'kms', 'perDeliveryCost', 'incentive', 'petrolCharge', 'totalPrice', 'paidBy', 'paidTo'],
+        values: items['delivery'],
+        count: count['delivery'] || 0,
+        loadEntity
     }
     const materialData = {
         headers: ['type', 'expenseDate', 'itemName', 'pricePerUnit', 'quantity', 'totalPrice', 'paidBy', 'paidTo', 'status'],
-        values: items['material'] || []
+        values: items['material'] || [],
+        count: count['material'] || 0,
+        loadEntity
     }
     const otherData = {
         headers: ['type', 'expenseDate', 'riderName', 'noOfDelivery', 'kms', 'perDeliveryCost', 'incentive', 'petrolCharge', 'totalPrice', 'paidBy', 'paidTo', 'status'],
-        values: items['other'] || []
+        values: items['other'] || [],
+        count: count['other'] || 0,
+        loadEntity
     }
 
     return (
@@ -495,7 +541,7 @@ const Expenses = () => {
                                         <option key={uuid()} value={'partiallyPaid'}>Partially Paid</option>
                                     </select>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div className="modal-footer justify-content-between">
@@ -509,9 +555,9 @@ const Expenses = () => {
                     </div>
                 </div>
             </div>
-            <DataTable className="pb-4" title="Material Expenses" data={materialData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
-            <DataTable className="pt-4 pb-4" title="Delivery Expenses" data={deliveryData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
-            <DataTable className="pt-4" title="Other Expenses" data={otherData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
+            <DataTable pagination={true} className="pb-4" title="Material Expenses" data={materialData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
+            <DataTable pagination={true} className="pt-4 pb-4" title="Delivery Expenses" data={deliveryData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
+            <DataTable pagination={true} className="pt-4" title="Other Expenses" data={otherData} isActionEnabled={true} editItem={''} deleteItem={''} addItem={resetItem} targetId="#expense-modal" />
         </AppDashboard>
     )
 };

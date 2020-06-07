@@ -8,7 +8,6 @@ import $ from "jquery";
 import { validateS } from "./../util/validateUtil";
 import { string, object, number, date } from "yup";
 import { uuid } from "uuidv4";
-import { printDiffOrStringify } from "jest-matcher-utils";
 
 const validationSchema = object().shape({
     saleType: string()
@@ -115,7 +114,7 @@ const Sale = () => {
         headers: ['saleDate', 'productName', 'saleWeight', 'wholeWeight', 'pricePerUnit', 'totalPrice'],
         values: items
     }
-
+debugger
     return (
         <AppDashboard>
             <div

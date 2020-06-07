@@ -33,3 +33,68 @@ span.error-msg {
 .Toastify__toast {
     font-size: 20px;
 }
+
+.col-form-label {
+    font-size: 1.7rem;
+}
+.form-control {
+    padding: 5px;
+    font-size: 1.7rem;
+    height: 45px;
+}
+.modal-title {
+    font-size: 2rem;
+}
+.modal .btn {
+    font-size: 2rem;
+}
+
+.btn {
+    font-size: 1.4rem;
+}
+.table {
+    font-size: 1.7rem;
+}
+.card {
+    font-size: 1.7rem !important;
+    font-weight: 900 !important;
+    margin-top: 5px;
+}
+.pagination {
+    float: right;
+}
+.pagination>li {
+    display: inline-block;
+    padding-left: 0;
+}
+
+.pagination>li {
+    list-style: none;
+    border: 0.9px solid;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #2c689c;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+
+.pagination>li.active>a {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.pagination>li>a:hover {
+    background-color: #218838;
+    color: white;
+}
+
